@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { authService } from "../Services/AuthService";
@@ -7,17 +7,28 @@ import { IUser } from "../Types/user";
 const AuthContext: any = createContext(null);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
+  const [user, setUser] = useState({});
   const navigate = useNavigate();
-  const userToken = localStorage.getItem("user");
-  const userData = userToken ? JSON.parse(userToken) : {};
-  const [user, setUser] = useState<IUser>();
+  const localUsedData = localStorage.getItem("user");
+  const userData = localUsedData ? JSON.parse(localUsedData) : {};
 
-  const handleRegister = async (data: any) => {
+  const handleLogin = async (data: IUser) => {
+    try {
+      const response = await authService.login(data);
+      setUser(response.data.user);
+      localStorage.setItem("user", JSON.stringify(response.data.user));
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleRegister = async (data: IUser) => {
     try {
       const response = await authService.register(data);
       setUser(response.data.user);
       localStorage.setItem("user", JSON.stringify(response.data.user));
-      navigate("/");
+      navigate("/login");
     } catch (error) {}
   };
 
@@ -25,7 +36,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     <AuthContext.Provider
       value={{
         user,
+        setUser,
         register: handleRegister,
+        login: handleLogin,
       }}
     >
       {children}
