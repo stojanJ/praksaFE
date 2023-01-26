@@ -1,31 +1,35 @@
+import { IUser } from "../Types/user";
 import { httpService } from "./HttpService";
 
 class AuthService {
   axiosInstance: any;
-  data: any;
+  authorizationHeader: any;
 
   constructor() {
     this.axiosInstance = httpService.axiosInstance;
-    this.setAxiosAuthorizationHeader();
+    this.authorizationHeader = httpService.setAxiosAuthorizationHeader;
   }
 
-  setAxiosAuthorizationHeader(tokenParam = null) {
-    let token = tokenParam ? tokenParam : localStorage.getItem("token");
-
-    if (token) {
-      this.axiosInstance.defaults.headers.common[
-        "Authorization"
-      ] = `Bearer ${token}`;
+  async register(data: IUser) {
+    try {
+      const response = await this.axiosInstance.post("/register", data);
+      localStorage.setItem("token", response.data.authorisation.token);
+      this.authorizationHeader(response.data.authorisation.token);
+      return response;
+    } catch {
+      console.error("Register error");
     }
   }
 
-  async register(data: any) {
-    console.log(data, "tu sam");
-    const response = await this.axiosInstance.post("/register", data);
-    localStorage.setItem("token", response.data.authorisation.token);
-    this.setAxiosAuthorizationHeader(response.data.authorisation.token);
-
-    return response;
+  async login(data: IUser) {
+    try {
+      const response = await this.axiosInstance.post("/login", data);
+      localStorage.setItem("token", response.data.authorisation.token);
+      this.authorizationHeader(response.data.authorisation.token);
+      return response;
+    } catch {
+      console.error("Login error");
+    }
   }
 }
 
