@@ -34,54 +34,53 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
   } = props;
   return (
     <Form onSubmit={handleSubmit} autoComplete="off">
-      <fieldset>
-        <Form.Group className="mb-3">
-          <Form.Label htmlFor="email">Email</Form.Label>
-          <Form.Control
-            id="email"
-            type="email"
-            placeholder="email"
-            value={values.email}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            className={errors.email && touched.email ? "input-error" : ""}
-          />
-        </Form.Group>
-        {errors.email && touched.email && (
-          <p className="error">{errors.email}</p>
-        )}
-        <Form.Group className="mb-3">
-          <Form.Label htmlFor="name">Email</Form.Label>
-          <Form.Control
-            id="name"
-            type="name"
-            placeholder="name"
-            value={values.name}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            className={errors.name && touched.name ? "input-error" : ""}
-          />
-        </Form.Group>
-        {errors.name && touched.name && <p className="error">{errors.name}</p>}
-        <Form.Group className="mb-3">
-          <Form.Label htmlFor="password">Image</Form.Label>
-          <Form.Control
-            id="password"
-            type="password"
-            placeholder="password"
-            value={values.password}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            className={errors.password && touched.password ? "input-error" : ""}
-          />
-        </Form.Group>
-        {errors.password && touched.password && (
-          <p className="error">{errors.password}</p>
-        )}
-        <Button type="submit" disabled={isSubmitting}>
-          Login
-        </Button>
-      </fieldset>
+      <Form.Group className="mb-3">
+        <Form.Label htmlFor="email">Email</Form.Label>
+        <Form.Control
+          id="email"
+          type="email"
+          placeholder="email"
+          style={{ width: "40%" }}
+          value={values.email}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          className={errors.email && touched.email ? "input-error" : ""}
+        />
+      </Form.Group>
+      {errors.email && touched.email && <p className="error">{errors.email}</p>}
+      <Form.Group className="mb-3">
+        <Form.Label htmlFor="name">Email</Form.Label>
+        <Form.Control
+          id="name"
+          type="name"
+          placeholder="name"
+          style={{ width: "40%" }}
+          value={values.name}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          className={errors.name && touched.name ? "input-error" : ""}
+        />
+      </Form.Group>
+      {errors.name && touched.name && <p className="error">{errors.name}</p>}
+      <Form.Group className="mb-3">
+        <Form.Label htmlFor="password">Image</Form.Label>
+        <Form.Control
+          id="password"
+          type="password"
+          placeholder="password"
+          style={{ width: "40%" }}
+          value={values.password}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          className={errors.password && touched.password ? "input-error" : ""}
+        />
+      </Form.Group>
+      {errors.password && touched.password && (
+        <p className="error">{errors.password}</p>
+      )}
+      <Button type="submit" disabled={isSubmitting}>
+        Login
+      </Button>
     </Form>
   );
 };

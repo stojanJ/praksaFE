@@ -1,11 +1,11 @@
 import React from "react";
-import Navbar from "./Navbar";
+import Navigationbar from "./Navigationbar";
 
 const DefaultLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div>
       <div>
-        <Navbar />
+        <Navigationbar />
       </div>
       <div>{children}</div>
     </div>

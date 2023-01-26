@@ -1,9 +1,9 @@
 import React from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 
-import Register from "./Pagrs/Register";
-import Login from "./Pagrs/Login";
-import Home from "./Pagrs/Home";
+import Register from "./Pages/Register";
+import Login from "./Pages/Login";
+import Home from "./Pages/Home";
 
 export default function Router() {
   return (
