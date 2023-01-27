@@ -22,7 +22,6 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
   const {
     values,
     touched,
-    message,
     errors,
     isSubmitting,
     handleSubmit,
@@ -71,7 +70,7 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
 };
 
 const Login: React.FC<{}> = (props: any) => {
-  const { user, login } = useAuth();
+  const { login } = useAuth();
   const LoginForm = withFormik<MyFormProps, FormValues>({
     mapPropsToValues: (props) => ({
       email: props.initialEmail,

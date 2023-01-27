@@ -10,7 +10,7 @@ interface FormValues {
   title: string | undefined;
   description: string | undefined;
   url: string | undefined;
-  genre: string | undefined;
+  genre: Array<string> | undefined;
 }
 
 interface OtherProps {
@@ -20,14 +20,13 @@ interface MyFormProps {
   initialTitle?: string;
   initialDescription?: string;
   initialImage?: string;
-  initialGenre?: string;
+  initialGenre?: Array<string>;
 }
 
 const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
   const {
     values,
     touched,
-    message,
     errors,
     isSubmitting,
     handleSubmit,
