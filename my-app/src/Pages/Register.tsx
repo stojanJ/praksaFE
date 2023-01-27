@@ -25,7 +25,6 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
   const {
     values,
     touched,
-    message,
     errors,
     isSubmitting,
     handleSubmit,
@@ -49,7 +48,7 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
       </Form.Group>
       {errors.email && touched.email && <p className="error">{errors.email}</p>}
       <Form.Group className="mb-3">
-        <Form.Label htmlFor="name">Email</Form.Label>
+        <Form.Label htmlFor="name">Name</Form.Label>
         <Form.Control
           id="name"
           type="name"
@@ -63,7 +62,7 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
       </Form.Group>
       {errors.name && touched.name && <p className="error">{errors.name}</p>}
       <Form.Group className="mb-3">
-        <Form.Label htmlFor="password">Image</Form.Label>
+        <Form.Label htmlFor="password">Password</Form.Label>
         <Form.Control
           id="password"
           type="password"
@@ -79,14 +78,14 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
         <p className="error">{errors.password}</p>
       )}
       <Button type="submit" disabled={isSubmitting}>
-        Login
+        Register
       </Button>
     </Form>
   );
 };
 
 const Register: React.FC<{}> = (props: any) => {
-  const { user, register } = useAuth();
+  const { register } = useAuth();
 
   const RegisterForm = withFormik<MyFormProps, FormValues>({
     mapPropsToValues: (props) => ({
