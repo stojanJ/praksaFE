@@ -10,5 +10,5 @@ export const movieCreateSchemas = yup.object().shape({
       "Enter correct url!"
     )
     .required("Please enter website"),
-  genre: yup.string().required("Please enter website"),
+  genre: yup.array().required("Please enter website"),
 });
