@@ -7,7 +7,7 @@ import { Button } from "react-bootstrap";
 import { Form } from "react-bootstrap";
 
 interface FormValues {
-  title: string | undefined;
+  title?: string;
   description: string | undefined;
   url: string | undefined;
   genre: Array<string> | undefined;
@@ -20,7 +20,7 @@ interface MyFormProps {
   initialTitle?: string;
   initialDescription?: string;
   initialImage?: string;
-  initialGenre?: Array<string>;
+  initialGenre?: Array<string> | undefined;
 }
 
 const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
@@ -34,7 +34,7 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
     handleChange,
   } = props;
   return (
-    <Form onSubmit={handleSubmit} autoComplete="off">
+    <Form onSubmit={handleSubmit} autoComplete="off" style={{ width: "80%" }}>
       <fieldset>
         <Form.Group className="mb-3">
           <Form.Label htmlFor="title">Title</Form.Label>
@@ -122,20 +122,27 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
   );
 };
 
-const CreateMovie: React.FC<{}> = (props: any) => {
+const CreateMovie: React.FC = () => {
   const { user } = useAuth();
-  let user_id = user.id;
+  const user_id = user.id;
+
   const CreateMoviForm = withFormik<MyFormProps, FormValues>({
     mapPropsToValues: (props) => ({
-      title: props.initialTitle,
-      description: props.initialDescription,
-      url: props.initialImage,
-      genre: props.initialGenre,
+      title: "",
+      description: "",
+      url: "",
+      genre: undefined,
     }),
     validationSchema: movieCreateSchemas,
 
     handleSubmit({ title, description, url, genre }: FormValues) {
-      movieService.postMovies({ title, description, url, genre, user_id });
+      movieService.postMovies({
+        title,
+        description,
+        url,
+        genre,
+        user_id,
+      });
     },
   })(InnerForm);
   return (

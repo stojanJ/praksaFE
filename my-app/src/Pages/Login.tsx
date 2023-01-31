@@ -29,7 +29,7 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
     handleChange,
   } = props;
   return (
-    <Form onSubmit={handleSubmit} autoComplete="off">
+    <Form onSubmit={handleSubmit} autoComplete="off" style={{ width: "80%" }}>
       <fieldset>
         <Form.Group className="mb-3">
           <Form.Label htmlFor="email">Email</Form.Label>
