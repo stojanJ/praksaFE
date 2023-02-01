@@ -7,10 +7,10 @@ import { IUser } from "../Types/user";
 const AuthContext: any = createContext(null);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [user, setUser] = useState({});
   const navigate = useNavigate();
-  // const localUsedData = localStorage.getItem("user");
-  // const userData = localUsedData ? JSON.parse(localUsedData) : {};
+  const localUsedData = localStorage.getItem("user");
+  const userData = localUsedData ? JSON.parse(localUsedData) : {};
+  const [user, setUser] = useState(userData);
 
   const handleLogin = async (data: IUser) => {
     try {

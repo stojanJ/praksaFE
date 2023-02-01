@@ -6,6 +6,7 @@ import Navbar from "react-bootstrap/Navbar";
 
 const Navigationbar: React.FC<{}> = () => {
   const { user } = useAuth();
+
   return (
     <Navbar bg="dark" variant="dark">
       <Nav className="row align-items-center">
