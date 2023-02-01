@@ -41,3 +41,8 @@ input.input-error,
 select.input-error {
   border-color: red;
 }
+.register {
+  display: "flex";
+  flex-direction: "column";
+  background: "red";
+}
