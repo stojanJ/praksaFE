@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { authService } from "../Services/AuthService";
@@ -9,8 +9,8 @@ const AuthContext: any = createContext(null);
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState({});
   const navigate = useNavigate();
-  const localUsedData = localStorage.getItem("user");
-  const userData = localUsedData ? JSON.parse(localUsedData) : {};
+  // const localUsedData = localStorage.getItem("user");
+  // const userData = localUsedData ? JSON.parse(localUsedData) : {};
 
   const handleLogin = async (data: IUser) => {
     try {

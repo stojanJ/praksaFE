@@ -1,15 +1,16 @@
+import React, { useState } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { movieService } from "../Services/MovieService";
-import { Link } from "react-router-dom";
-import TruncateMarkup from "react-truncate-markup";
+import MovieList from "../Components/MovieList";
 
 const Home: React.FC<{}> = (props: any) => {
   const queryClient = useQueryClient();
-  queryClient.invalidateQueries(["movies"]);
 
-  const { isError, isStale, isLoading, data, error } = useQuery(
-    ["movies"],
-    movieService.fetchAllMovies
+  const [page, setPage] = useState(1);
+
+  const { isError, isLoading, data, isFetching, isPreviousData } = useQuery(
+    ["movies", page],
+    () => movieService.fetchAllMovies(page)
   );
 
   if (isLoading) {
@@ -19,21 +20,32 @@ const Home: React.FC<{}> = (props: any) => {
   if (isError) {
     return <div>Error...</div>;
   }
-
+  console.log(data?.total_pages);
   return (
-    <div className="card" style={{ width: 400 }}>
-      {data.movie &&
-        data.movie.map((movie: any) => (
-          <li className="card-title" key={movie.id}>
-            <Link to={`/moive/${movie.id}`}> {movie.title}</Link>
-            <img className="card-img-top" src={movie.url} />
-            <TruncateMarkup lines={1}>
-              <p className="card-text">Description:{movie.description}</p>
-            </TruncateMarkup>
-            <br />
-            <p>Genre: {movie.genre} </p>
-          </li>
-        ))}
+    <div>
+      {data?.movies &&
+        data.movies.map((movie) => <MovieList key={movie.id} movie={movie} />)}
+      <span>Current Page: {page}</span>
+      <button
+        onClick={() => {
+          setPage((old) => Math.max(old - 1, 1));
+          queryClient.invalidateQueries(["movies"]);
+        }}
+        disabled={page === 1}
+      >
+        Previous Page
+      </button>{" "}
+      <button
+        onClick={() => {
+          if (!isPreviousData && data?.total_pages) {
+            setPage((old) => old + 1);
+          }
+        }}
+        disabled={isPreviousData || !data?.total_pages}
+      >
+        Next Page
+      </button>
+      {isFetching ? <span> Loading...</span> : null}{" "}
     </div>
   );
 };
