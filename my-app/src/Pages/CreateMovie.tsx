@@ -1,11 +1,11 @@
 import React from "react";
-import { withFormik, FormikProps } from "formik";
+import { withFormik, FormikProps, Field } from "formik";
 import { movieCreateSchemas } from "../Schemas/movieCreateSchemas";
 import { movieService } from "../Services/MovieService";
 import useAuth from "../Hooks/useAuth";
 import { Button } from "react-bootstrap";
 import { Form } from "react-bootstrap";
-
+import GenreSelect from "../Components/GenreList";
 interface FormValues {
   title?: string;
   description: string | undefined;
@@ -22,7 +22,12 @@ interface MyFormProps {
   initialImage?: string;
   initialGenre?: Array<string> | undefined;
 }
-
+const genreOptions = [
+  { label: "Drama", value: "drama" },
+  { label: "Action", value: "action" },
+  { label: "Comedy", value: "comedy" },
+  { label: "Horror", value: "horror" },
+];
 const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
   const {
     values,
@@ -85,34 +90,14 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
         {errors.url && touched.url && <p className="error">{errors.url}</p>}
         <Form.Group className="mb-3">
           <Form.Label htmlFor="genre">Genre</Form.Label>
-          <Form.Select
+          <Field
+            className="custom-select"
             name="genre"
-            value={values.genre}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            style={{ display: "block" }}
-            id="genre"
-          >
-            <option value="" label="Select a genre">
-              Select a genre{" "}
-            </option>
-            <option value="action" label="action">
-              {" "}
-              Action
-            </option>
-            <option value="drama" label="drama">
-              Drama
-            </option>
-            <option value="documentary" label="documentary">
-              Documentary
-            </option>
-            <option value="horror" label="horror">
-              Horror
-            </option>
-            <option value="comedy" label="comedy">
-              Comedy
-            </option>
-          </Form.Select>
+            options={genreOptions}
+            component={GenreSelect}
+            placeholder="Select multi genre..."
+            isMulti={true}
+          />
         </Form.Group>
         <Button type="submit" disabled={isSubmitting}>
           Submit
@@ -131,7 +116,7 @@ const CreateMovie: React.FC = () => {
       title: "",
       description: "",
       url: "",
-      genre: undefined,
+      genre: [],
     }),
     validationSchema: movieCreateSchemas,
 

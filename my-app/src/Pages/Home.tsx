@@ -9,11 +9,12 @@ const Home: React.FC<{}> = (props: any) => {
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState("");
   const debouncedSearch = useDebounce(search, 750);
+  const [selectedGenre, setSelectedGenre] = useState("");
 
   const { isError, isLoading, data, isFetching, isPreviousData } = useQuery(
-    ["movie", debouncedSearch],
+    ["movie", debouncedSearch, selectedGenre],
     () => {
-      return movieService.fetchAllMovies(page, debouncedSearch);
+      return movieService.fetchAllMovies(page, debouncedSearch, selectedGenre);
     }
   );
 
@@ -35,6 +36,26 @@ const Home: React.FC<{}> = (props: any) => {
           placeholder="Enter your search term here"
         />
       </div>
+      <select onChange={(e) => setSelectedGenre(e.target.value)}>
+        <option value="" label="Select a genre">
+          Select a genre
+        </option>
+        <option value="action" label="action">
+          Action
+        </option>
+        <option value="drama" label="drama">
+          Drama
+        </option>
+        <option value="documentary" label="documentary">
+          Documentary
+        </option>
+        <option value="horror" label="horror">
+          Horror
+        </option>
+        <option value="comedy" label="comedy">
+          Comedy
+        </option>
+      </select>
       <div>
         {data?.movies &&
           data.movies.map((movie) => (

@@ -1,11 +1,16 @@
 import { httpService } from "./HttpService";
 import IMovie from "../Types/Imovie";
 class MovieService {
-  fetchAllMovies = async (page: number, search: string = "") => {
+  fetchAllMovies = async (
+    page: number,
+    search: string = "",
+    genre: string = ""
+  ) => {
     try {
       const response = await httpService.axiosInstance.get(
-        `/movies?page=${page}&title=${search}`
+        `/movies?page=${page}&title=${search}&genre=${genre}`
       );
+
       const movies: Array<IMovie> = response.data.movie.data.map(
         (movie: IMovie) => ({
           id: movie.id,
