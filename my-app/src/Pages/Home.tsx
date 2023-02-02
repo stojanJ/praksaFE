@@ -17,7 +17,6 @@ const Home: React.FC<{}> = (props: any) => {
       return movieService.fetchAllMovies(page, debouncedSearch, selectedGenre);
     }
   );
-
   if (isLoading) {
     return <div>Loading...</div>;
   }

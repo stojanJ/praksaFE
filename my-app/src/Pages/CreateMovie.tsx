@@ -6,6 +6,7 @@ import useAuth from "../Hooks/useAuth";
 import { Button } from "react-bootstrap";
 import { Form } from "react-bootstrap";
 import GenreSelect from "../Components/GenreList";
+import { useNavigate } from "react-router-dom";
 interface FormValues {
   title?: string;
   description: string | undefined;
@@ -27,6 +28,7 @@ const genreOptions = [
   { label: "Action", value: "action" },
   { label: "Comedy", value: "comedy" },
   { label: "Horror", value: "horror" },
+  { label: "Documentary", value: "documentary" },
 ];
 const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
   const {
@@ -110,6 +112,7 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
 const CreateMovie: React.FC = () => {
   const { user } = useAuth();
   const user_id = user.id;
+  const navigate = useNavigate();
 
   const CreateMoviForm = withFormik<MyFormProps, FormValues>({
     mapPropsToValues: (props) => ({
@@ -128,6 +131,7 @@ const CreateMovie: React.FC = () => {
         genre,
         user_id,
       });
+      navigate("/");
     },
   })(InnerForm);
   return (

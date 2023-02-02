@@ -2,10 +2,10 @@ import React from "react";
 import { useQuery } from "@tanstack/react-query";
 import { movieService } from "../Services/MovieService";
 import { useParams } from "react-router-dom";
+import LikeDislike from "../Components/LIkeDislike";
 
 const SingleMovie: React.FC<{}> = (props) => {
   const { movie_id } = useParams();
-  console.log(movie_id);
 
   const {
     isError,
@@ -39,6 +39,7 @@ const SingleMovie: React.FC<{}> = (props) => {
               <p>{movie.description}</p>
               <br />
               <p>Genre: {movie.genre} </p>
+              <LikeDislike movie={movie} />
             </div>
           )
         : "loading"}

@@ -5,4 +5,5 @@ export default interface IMovie {
   url: string | undefined;
   genre: Array<string> | undefined;
   user_id: number;
+  like?: Array<object> | undefined;
 }
