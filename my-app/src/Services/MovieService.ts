@@ -19,6 +19,7 @@ class MovieService {
           url: movie.url,
           genre: movie.genre,
           user_id: movie.user_id,
+          like: movie.like,
         })
       );
       return { movies, total_pages: response.data.movie.last_page };
@@ -32,6 +33,7 @@ class MovieService {
         "/movies",
         newMovie
       );
+
       return response.data;
     } catch {
       console.error("POST movies error");
@@ -47,6 +49,7 @@ class MovieService {
         url: data.movie.url,
         genre: data.movie.genre,
         user_id: data.movie.user_id,
+        like: data.movie.like,
       };
 
       return movie;
