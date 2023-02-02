@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import IMovie from "../Types/Imovie";
 import LikeDislike from "../Components/LIkeDislike";
+import ViewCounter from "./ViewCounter";
 
 const MovieList = ({ movie }: { movie: IMovie }) => {
   return (
@@ -15,6 +16,7 @@ const MovieList = ({ movie }: { movie: IMovie }) => {
       <br />
       <p>Genre: {movie.genre} </p>
       <LikeDislike movie={movie} />
+      <ViewCounter movie={movie} />
     </div>
   );
 };

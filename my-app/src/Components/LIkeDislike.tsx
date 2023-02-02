@@ -27,16 +27,12 @@ const LikeDislike = ({ movie }: { movie: any }) => {
   );
 
   const handleLike = ({ movie_id, user_id }: ILike) => {
-    var like = 1;
-    var dislike = 0;
-    likeDislikeService.postLike({ movie_id, user_id, like, dislike });
+    likeDislikeService.postLike({ movie_id, user_id });
     window.location.reload();
   };
 
   const handleDislike = ({ movie_id, user_id }: ILike) => {
-    var like = 0;
-    var dislike = 1;
-    likeDislikeService.postLike({ movie_id, user_id, like, dislike });
+    likeDislikeService.postDislike({ movie_id, user_id });
     window.location.reload();
   };
 
@@ -44,43 +40,24 @@ const LikeDislike = ({ movie }: { movie: any }) => {
     <div className="card" style={{ width: "80%" }}>
       <>
         <h5 key={movie.id}>Likes:{sumLikes}</h5>
-        {usersId?.includes(user_id) ? (
-          <Button
-            type="submit"
-            onClick={() => handleLike({ movie_id, user_id })}
-            disabled={true}
-          >
-            Like
-          </Button>
-        ) : (
-          <Button
-            type="submit"
-            onClick={() => handleLike({ movie_id, user_id })}
-            disabled={false}
-          >
-            Like
-          </Button>
-        )}
+        <Button
+          type="submit"
+          onClick={() => handleLike({ movie_id, user_id })}
+          disabled={usersId?.includes(user_id)}
+        >
+          Like
+        </Button>
       </>
       <>
         <h5 key={movie.id}>Dislikes:{sumDislike}</h5>
-        {usersId?.includes(user_id) ? (
-          <Button
-            type="submit"
-            onClick={() => handleDislike({ movie_id, user_id })}
-            disabled={true}
-          >
-            Dislike
-          </Button>
-        ) : (
-          <Button
-            type="submit"
-            onClick={() => handleDislike({ movie_id, user_id })}
-            disabled={false}
-          >
-            Dislike
-          </Button>
-        )}
+
+        <Button
+          type="submit"
+          onClick={() => handleDislike({ movie_id, user_id })}
+          disabled={usersId?.includes(user_id)}
+        >
+          Dislike
+        </Button>
       </>
     </div>
   );

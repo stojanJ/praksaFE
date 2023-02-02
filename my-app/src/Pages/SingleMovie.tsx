@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { movieService } from "../Services/MovieService";
 import { useParams } from "react-router-dom";
 import LikeDislike from "../Components/LIkeDislike";
+import ViewCounter from "../Components/ViewCounter";
 
 const SingleMovie: React.FC<{}> = (props) => {
   const { movie_id } = useParams();
@@ -40,6 +41,7 @@ const SingleMovie: React.FC<{}> = (props) => {
               <br />
               <p>Genre: {movie.genre} </p>
               <LikeDislike movie={movie} />
+              <ViewCounter movie={movie} />
             </div>
           )
         : "loading"}

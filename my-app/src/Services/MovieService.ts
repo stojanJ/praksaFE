@@ -1,5 +1,6 @@
 import { httpService } from "./HttpService";
 import IMovie from "../Types/Imovie";
+import { viewService } from "./VIewService";
 class MovieService {
   fetchAllMovies = async (
     page: number,
@@ -20,6 +21,7 @@ class MovieService {
           genre: movie.genre,
           user_id: movie.user_id,
           like: movie.like,
+          view: movie.view,
         })
       );
       return { movies, total_pages: response.data.movie.last_page };
@@ -50,8 +52,10 @@ class MovieService {
         genre: data.movie.genre,
         user_id: data.movie.user_id,
         like: data.movie.like,
+        view: data.movie.view,
       };
 
+      viewService.postView(data.movie.id);
       return movie;
     } catch {
       console.error("GET single movies error");
