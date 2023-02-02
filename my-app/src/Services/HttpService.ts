@@ -12,7 +12,6 @@ class HttpService {
 
   setAxiosAuthorizationHeader(tokenParam = null) {
     let token = tokenParam ? tokenParam : localStorage.getItem("token");
-
     if (token) {
       this.axiosInstance.defaults.headers.common[
         "Authorization"

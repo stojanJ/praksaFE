@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import IMovie from "../Types/Imovie";
+import LikeDislike from "../Components/LIkeDislike";
 
 const MovieList = ({ movie }: { movie: IMovie }) => {
   return (
@@ -13,6 +14,7 @@ const MovieList = ({ movie }: { movie: IMovie }) => {
         : movie.description}
       <br />
       <p>Genre: {movie.genre} </p>
+      <LikeDislike movie={movie} />
     </div>
   );
 };
