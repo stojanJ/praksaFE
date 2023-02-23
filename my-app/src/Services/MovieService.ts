@@ -22,6 +22,7 @@ class MovieService {
           user_id: movie.user_id,
           like: movie.like,
           view: movie.view,
+          comment: movie.comment,
         })
       );
       return { movies, total_pages: response.data.movie.last_page };
@@ -53,6 +54,7 @@ class MovieService {
         user_id: data.movie.user_id,
         like: data.movie.like,
         view: data.movie.view,
+        comment: data.movie.comment,
       };
 
       viewService.postView(data.movie.id);

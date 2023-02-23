@@ -4,10 +4,11 @@ import { movieService } from "../Services/MovieService";
 import { useParams } from "react-router-dom";
 import LikeDislike from "../Components/LIkeDislike";
 import ViewCounter from "../Components/ViewCounter";
+import CreateComment from "../Components/CreateComments";
+import CommentList from "../Components/CommentList";
 
 const SingleMovie: React.FC<{}> = (props) => {
   const { movie_id } = useParams();
-
   const {
     isError,
     isLoading,
@@ -42,6 +43,8 @@ const SingleMovie: React.FC<{}> = (props) => {
               <p>Genre: {movie.genre} </p>
               <LikeDislike movie={movie} />
               <ViewCounter movie={movie} />
+              <CommentList movie={movie} />
+              <CreateComment />
             </div>
           )
         : "loading"}

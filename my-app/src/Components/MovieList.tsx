@@ -2,8 +2,10 @@ import { Link } from "react-router-dom";
 import IMovie from "../Types/Imovie";
 import LikeDislike from "../Components/LIkeDislike";
 import ViewCounter from "./ViewCounter";
+import CommentList from "./CommentList";
 
 const MovieList = ({ movie }: { movie: IMovie }) => {
+  const { comment, ...rest } = movie;
   return (
     <div className="card" style={{ width: "80%" }}>
       <h3 className="card-title" key={movie.id}>
@@ -17,6 +19,7 @@ const MovieList = ({ movie }: { movie: IMovie }) => {
       <p>Genre: {movie.genre} </p>
       <LikeDislike movie={movie} />
       <ViewCounter movie={movie} />
+      <CommentList movie={movie} />
     </div>
   );
 };

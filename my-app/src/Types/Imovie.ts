@@ -7,4 +7,5 @@ export default interface IMovie {
   user_id: number;
   like?: Array<object> | undefined;
   view?: Array<object> | undefined;
+  comment?: Array<object> | undefined;
 }
